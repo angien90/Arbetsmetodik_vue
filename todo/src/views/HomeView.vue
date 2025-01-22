@@ -11,8 +11,10 @@ const todoName = ref('');
 const showCompletedMessage = ref(false); 
 
 function addTodo() {
-
+  if (todoName.value.trim() === '') return; // Kontrollera tomma uppgifter
   todoStore.addNewTodo(todoName.value, false); 
+  todoName.value = ''; // Töm input-fältet efter tillägg
+  //todoStore.addNewTodo(todoName.value, false); 
 }
 
 function onTaskCompleted() { 
@@ -23,6 +25,10 @@ function onTaskCompleted() {
 function clearMessage() { 
   showCompletedMessage.value = false; 
 } 
+
+function removeTodoFromList(id: number) {
+  todoStore.deleteTodo(id); 
+}
 </script>
 
 <template>
@@ -34,7 +40,13 @@ function clearMessage() {
      <p v-if="showCompletedMessage">Snyggt jobbat med att göra klart en uppgift!</p>
 
       <div v-if="todos.length > 0" v-for="(todo, index) in todos" :key="index">
-        <SingleTodo :todo-text="todo.text" :complete="todo.complete" :id="todo.id" @task-completed="onTaskCompleted" />
+        <SingleTodo 
+          :todo-text="todo.text" 
+          :complete="todo.complete" 
+          :id="todo.id" 
+          @task-completed="onTaskCompleted" 
+          @remove-todo="removeTodoFromList" 
+        />
       </div>
 
       <p v-if="todos.length === 0">Du är klar med alla uppgifter!</p>

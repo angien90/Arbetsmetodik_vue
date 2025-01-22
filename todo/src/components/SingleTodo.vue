@@ -3,13 +3,15 @@ import { ref } from 'vue';
 import { useTodosStore } from '@/stores/todos.ts'; 
 
 const props = defineProps({
-  id: { type: Number, required: true }, 
+  id: { type: Number, required: true },
   todoText: { type: String, required: true },
   complete: { type: Boolean, default: false },
 });
 
-const emit = defineEmits(['taskCompleted']); 
-const todoStore = useTodosStore(); 
+const emit = defineEmits(['taskCompleted', 'removeTodo']); 
+
+const todoStore = useTodosStore();
+
 const isDone = ref(props.complete);
 
 function toggleCompletedState() {
@@ -21,6 +23,10 @@ function toggleCompletedState() {
 
   todoStore.toggleTodoState(props.id, isDone.value);
 }
+
+function removeObjectFromList() {
+  emit('removeTodo', props.id);
+}
 </script>
 
 <template>
@@ -31,6 +37,9 @@ function toggleCompletedState() {
         <span v-if="isDone">Avmarkera som klar</span>
         <span v-if="!isDone">Markera som klar</span>
       </button>
+    </div>
+    <div>
+      <button @click="removeObjectFromList">Ta bort</button>
     </div>
   </div>
 </template>
