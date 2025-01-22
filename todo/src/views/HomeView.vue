@@ -27,6 +27,8 @@ function clearMessage() {
 
 <template>
   <main>
+    <h1>Mission Possible</h1>
+    <h2>Gör dina uppdrag möjliga</h2>
     <div class="my-8">
 
      <p v-if="showCompletedMessage">Snyggt jobbat med att göra klart en uppgift!</p>
@@ -42,3 +44,31 @@ function clearMessage() {
     <button @click="addTodo">Lägg till todo</button>
   </main>
 </template>
+
+<style>
+  nav {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+
+  h1, h2  {
+    text-align: center; 
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  
+  nav a {
+    margin: 20px;
+  }
+
+  input {
+    height: 30px;
+  }
+
+</style>

@@ -36,7 +36,18 @@ function toggleCompletedState() {
 </template>
 
 <style scoped>
-.completed {
-  text-decoration: line-through;
-}
+  .completed {
+    text-decoration: line-through;
+  }
+
+  div {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  div.grid { 
+    border: 2px solid grey;
+  }
+
 </style>
