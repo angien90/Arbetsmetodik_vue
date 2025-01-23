@@ -23,6 +23,12 @@ const formattedDeadline = computed(() => {
   return '';
 });
 
+const isOverdue = computed(() => {
+  const deadlineDate = new Date(props.deadline);
+  const today = new Date();
+  return deadlineDate < today;
+});
+
 function toggleCompletedState() {
   isDone.value = !isDone.value;
   
@@ -39,7 +45,7 @@ function removeObjectFromList() {
 </script>
 
 <template>
-  <div :class="{ completed: isDone }" class="grid grid-cols-2 gap-2">
+  <div :class="{ completed: isDone, overdue: isOverdue }" class="grid grid-cols-2 gap-2">
     <div>
     <h3>{{ todoText }}</h3>
     <p>Deadline: {{ formattedDeadline }}</p>
@@ -71,6 +77,10 @@ function removeObjectFromList() {
 
   div.grid { 
     border: 2px solid grey;
+  }
+
+  .overdue {
+    color: red;
   }
 
 </style>
