@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useTodosStore } from '@/stores/todos.ts'; 
 
 const props = defineProps({
   id: { type: Number, required: true },
   todoText: { type: String, required: true },
   complete: { type: Boolean, default: false },
+  deadline: { type: String, required: true },
 });
 
 const emit = defineEmits(['taskCompleted', 'removeTodo']); 
@@ -13,6 +14,14 @@ const emit = defineEmits(['taskCompleted', 'removeTodo']);
 const todoStore = useTodosStore();
 
 const isDone = ref(props.complete);
+
+const formattedDeadline = computed(() => {
+  if (props.deadline) {
+    const date = new Date(props.deadline);
+    return date.toISOString().slice(0, 10);
+  }
+  return '';
+});
 
 function toggleCompletedState() {
   isDone.value = !isDone.value;
@@ -31,7 +40,11 @@ function removeObjectFromList() {
 
 <template>
   <div :class="{ completed: isDone }" class="grid grid-cols-2 gap-2">
-    <div>{{ todoText }}</div>
+    <div>
+    <h3>{{ todoText }}</h3>
+    <p>Deadline: {{ formattedDeadline }}</p>
+    </div>
+
     <div>
       <button @click="toggleCompletedState">
         <span v-if="isDone">Avmarkera som klar</span>
@@ -53,6 +66,7 @@ function removeObjectFromList() {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
+    background: lightgrey;
   }
 
   div.grid { 

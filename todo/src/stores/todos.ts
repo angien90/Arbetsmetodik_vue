@@ -9,6 +9,7 @@ export interface ITodo {
     id: number; 
     text: string;
     complete: boolean;
+    deadline: string;
   }
 
 const DEBUGGING = import.meta.env.DEV;
@@ -57,12 +58,9 @@ export const useTodosStore = defineStore('todos', () => {
     }
   }
 
-  function addNewTodo(text: string, complete: boolean): void {
-    // Öka id:t för vår nästa todo
+  function addNewTodo(text: string, complete: boolean, deadline: string): void {
     nextId.value += 1; 
-
-    todos.value.push({ text, complete, id: nextId.value }); // [!code highglight]
-
+    todos.value.push({ text, complete, id: nextId.value, deadline }); 
     saveTodosToLocalStorage();
   }
 
