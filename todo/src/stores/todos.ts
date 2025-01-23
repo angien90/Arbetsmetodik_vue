@@ -51,7 +51,7 @@ export const useTodosStore = defineStore('todos', () => {
   function saveTodosToLocalStorage() {
     const stringified = JSON.stringify(todos.value);
     localStorage.setItem('todos', stringified);
-
+  
     if (DEBUGGING) {
       console.log('Sparade följande värden i localStorage');
       console.table(todos.value);
@@ -77,7 +77,7 @@ export const useTodosStore = defineStore('todos', () => {
     const index = todos.value.findIndex(todo => todo.id === id);
     if (index !== -1) {
       todos.value.splice(index, 1);
-      saveTodosToLocalStorage(); // Uppdatera localStorage
+      saveTodosToLocalStorage();
     }
   }
 
@@ -86,7 +86,7 @@ export const useTodosStore = defineStore('todos', () => {
     getTodosFromLocalStorage();
   });
 
-  return { todos, addNewTodo, toggleTodoState, deleteTodo }; 
+  return { todos, addNewTodo, toggleTodoState, deleteTodo, saveTodosToLocalStorage }; 
 });
 
 // Används medan vi utvecklar så att ändringar vi skriver i denna fil

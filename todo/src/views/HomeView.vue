@@ -25,7 +25,6 @@ function addTodo() {
 
   todoStore.addNewTodo(todoName.value, false, currentDeadline); 
   todoName.value = ''; 
-  //todoStore.addNewTodo(todoName.value, false); 
 }
 
 function onTaskCompleted() { 
@@ -40,6 +39,12 @@ function clearMessage() {
 function removeTodoFromList(id: number) {
   todoStore.deleteTodo(id); 
 }
+
+function deleteFinishedTodos() {
+  const todosToKeep = todos.value.filter(todo => !todo.complete);
+  todos.value = todosToKeep;
+  todoStore.saveTodosToLocalStorage(); 
+}
 </script>
 
 <template>
@@ -52,6 +57,8 @@ function removeTodoFromList(id: number) {
       <option value="Inte klar">Inte klara</option>
       <option value="Visa alla">Alla todos</option>
     </select>
+
+    <button @click="deleteFinishedTodos">Ta bort klara Todos</button>
 
     <div class="my-8">
 
@@ -93,6 +100,8 @@ function removeTodoFromList(id: number) {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 600px; 
+  margin: 0 auto;
   }
 
   h1, h2  {
@@ -103,6 +112,12 @@ function removeTodoFromList(id: number) {
   
   nav a {
     margin: 20px;
+  }
+
+  select {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
   }
 
   input {
