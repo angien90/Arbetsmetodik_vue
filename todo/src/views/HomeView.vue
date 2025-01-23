@@ -7,6 +7,7 @@ import { storeToRefs } from 'pinia';
 const todoStore = useTodosStore(); 
 const { todos } = storeToRefs(todoStore); 
 const todoName = ref('');
+const filter = ref<'Klar' | 'Inte klar' | 'Visa alla'>('Visa alla');
 
 const showCompletedMessage = ref(false); 
 
@@ -45,6 +46,13 @@ function removeTodoFromList(id: number) {
   <main>
     <h1>Mission Possible</h1>
     <h2>Gör dina uppdrag möjliga</h2>
+
+    <select v-model="filter">
+      <option value="Klar">Klara</option>
+      <option value="Inte klar">Inte klara</option>
+      <option value="Visa alla">Alla todos</option>
+    </select>
+
     <div class="my-8">
 
      <p v-if="showCompletedMessage">Snyggt jobbat med att göra klart en uppgift!</p>
