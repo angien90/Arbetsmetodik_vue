@@ -33,11 +33,7 @@ const isOverdue = computed(() => {
 
 function toggleCompletedState() {
   isDone.value = !isDone.value;
-  
-  if (isDone.value) { 
-    emit('taskCompleted'); 
-  } 
-
+  emit('taskCompleted'); 
   todoStore.toggleTodoState(props.id, isDone.value);
 }
 
@@ -129,7 +125,7 @@ function removeObjectFromList() {
   /* Slutförda todos */
   .completed h3 {
     text-decoration: line-through;
-    color: #9ca3af;
+    color: #374151;
   }
 
   /* Styling för knappar */

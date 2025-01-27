@@ -26,29 +26,19 @@ function clearCompletedTodos() {
 
 <template>
   <main>
-    <h1>Klara Todos</h1>
+    <h2>Klara Todos</h2>
     <p v-if="completedTodos.length === 0">Det finns inga klara Todos just nu! 🎉</p>
     <ul v-else>
       <li v-for="todo in completedTodos" :key="todo.id">
-        <SingleTodo 
-          :todo-text="todo.text" 
-          :complete="todo.complete" 
-          :id="todo.id" 
-          :deadline="todo.deadline"
-          @remove-todo="removeTodoFromList" 
-        />
+        <SingleTodo :todo-text="todo.text" :complete="todo.complete" :id="todo.id" :deadline="todo.deadline"@remove-todo="removeTodoFromList" />
       </li>
     </ul>
-    <button class="clear-button" v-if="completedTodos.length > 0" @click="clearCompletedTodos">
-      Rensa bort alla klara Todos
-    </button>
+    <button class="clear-button" v-if="completedTodos.length > 0" @click="clearCompletedTodos">Rensa bort alla klara Todos</button>
   </main>
 </template>
 
 <style scoped>
   .clear-button {
-    display: flex;
-    justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: 30px;

@@ -10,38 +10,30 @@ const showCompletedMessage = ref(false);
 const todoName = ref('');
 const filter = ref<'Klar' | 'Inte klar' | 'Förfallna todos' | 'Visa alla'>('Visa alla');
 
-const today = computed(() => {
-  return new Date().toISOString().slice(0, 10);
-});
-
+const today = computed(() => new Date().toISOString().slice(0, 10));
 const todoDate = ref(today.value);
 
 const filteredTodos = computed(() => {
   const todayDate = new Date();
   todayDate.setHours(0, 0, 0, 0); 
 
-  switch (filter.value) {
-    case 'Klar':
-      return todos.value.filter(todo => todo.complete);
-    case 'Inte klar':
-      return todos.value.filter(todo => !todo.complete);
-    case 'Förfallna todos':
-      return todos.value.filter(todo => {
-        const deadlineDate = new Date(todo.deadline);
-        deadlineDate.setHours(0, 0, 0, 0); 
-
-        return !todo.complete && deadlineDate < todayDate;
-      });
-    default:
-      return todos.value; // Visa alla todos
-  }
+  return todos.value.filter(todo => {
+    if (filter.value === 'Visa alla') return true;
+    if (filter.value === 'Klar') return todo.complete;
+    if (filter.value === 'Inte klar') return !todo.complete;
+    if (filter.value === 'Förfallna todos') {
+      const deadlineDate = new Date(todo.deadline);
+      deadlineDate.setHours(0, 0, 0, 0); 
+      return !todo.complete && deadlineDate < todayDate;
+    }
+  });
 });
 
 function addTodo() {
-  if (todoName.value.trim() === '') return; 
-  const currentDeadline = todoDate.value ? new Date(todoDate.value).toISOString().slice(0, 10) : ''; 
-  todoStore.addNewTodo(todoName.value, false, currentDeadline); 
-  todoName.value = ''; 
+  if (todoName.value.trim()) {
+    todoStore.addNewTodo(todoName.value, false, today.value);
+    todoName.value = '';
+  }
 }
 
 function onTaskCompleted() { 
@@ -59,20 +51,11 @@ function removeTodoFromList(id: number) {
 
 function deleteFinishedTodos() {
   const completedTodos = todos.value.filter(todo => todo.complete);
+  if (!completedTodos.length || !confirm(`Vill du ta bort ${completedTodos.length} klar/klara Todos?`)) return;
   
-  if (completedTodos.length === 0) {
-    alert("Det finns inga klara Todos att ta bort!");
-    return;
-  }
-
-  const confirmDelete = confirm(`Du kommer att ta bort ${completedTodos.length}st klara Todos. Vill du fortsätta?`);
-  
-  if (confirmDelete) {
-    const todosToKeep = todos.value.filter(todo => !todo.complete);
-    todos.value = todosToKeep;
-    todoStore.saveTodosToLocalStorage();
-    alert(`${completedTodos.length} klara Todos har tagits bort.`);
-  }
+  todos.value = todos.value.filter(todo => !todo.complete);
+  todoStore.saveTodosToLocalStorage();
+  alert(`${completedTodos.length} klar/klara Todos har tagits bort.`);
 }
 </script>
 
@@ -98,7 +81,6 @@ function deleteFinishedTodos() {
         <option value="Inte klar">Inte klara</option>
         <option value="Förfallna todos">Förfallna todos</option>
       </select>
-
     <button @click="deleteFinishedTodos">Ta bort klara Todos</button>
     </section>
 
@@ -107,14 +89,7 @@ function deleteFinishedTodos() {
       <h2>Dina Tasks</h2>
       <ul>
         <li v-for="todo in filteredTodos" :key="todo.id">
-          <SingleTodo 
-            :todo-text="todo.text" 
-            :complete="todo.complete" 
-            :id="todo.id" 
-            :deadline="todo.deadline"
-            @task-completed="onTaskCompleted" 
-            @remove-todo="removeTodoFromList" 
-          />
+          <SingleTodo :todo-text="todo.text" :complete="todo.complete" :id="todo.id" :deadline="todo.deadline"@task-completed="onTaskCompleted" @remove-todo="removeTodoFromList" />
         </li>
       </ul>
       <p v-if="todos.length === 0">Du är klar med alla uppgifter! 👏👏👏</p>
@@ -129,17 +104,17 @@ function deleteFinishedTodos() {
     color: #333;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
   }
 
   main {
-    width: 90%;
+    width: 80%;
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
   }
 
   h1, h2, h3 {
@@ -151,6 +126,10 @@ function deleteFinishedTodos() {
     font-weight: lighter;
     color: #555;
     margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1em;
   }
 
   .input-container {
