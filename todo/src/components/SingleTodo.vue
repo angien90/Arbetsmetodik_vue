@@ -26,7 +26,9 @@ const formattedDeadline = computed(() => {
 const isOverdue = computed(() => {
   const deadlineDate = new Date(props.deadline);
   const today = new Date();
-  return deadlineDate < today;
+  today.setHours(0, 0, 0, 0);
+  deadlineDate.setHours(0, 0, 0, 0);
+  return !props.complete && deadlineDate < today;
 });
 
 function toggleCompletedState() {
@@ -45,42 +47,102 @@ function removeObjectFromList() {
 </script>
 
 <template>
-  <div :class="{ completed: isDone, overdue: isOverdue }" class="grid grid-cols-2 gap-2">
+  <div :class="{ completed: isDone, overdue: isOverdue }" class="todo-item">
     <div>
-    <h3>{{ todoText }}</h3>
-    <p>Deadline: {{ formattedDeadline }}</p>
+      <h3>{{ todoText }}</h3>
+      <div class="deadline-container">
+        <p>Deadline: {{ formattedDeadline }}</p>
+        <p v-if="isOverdue" class="overdue-icon">⚠️<span class="overdue-text">Förfallen!</span></p>
+      </div>
     </div>
 
-    <div>
+    <div class="buttons">
       <button @click="toggleCompletedState">
         <span v-if="isDone">Avmarkera som klar</span>
         <span v-if="!isDone">Markera som klar</span>
       </button>
-    </div>
-    <div>
       <button @click="removeObjectFromList">Ta bort</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .completed {
-    text-decoration: line-through;
-  }
-
-  div {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  /* Styling för todo-item */
+  .todo-item {
+    margin: 10px 0;
     text-align: center;
-    background: lightgrey;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 2px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
-  div.grid { 
-    border: 2px solid grey;
+  /* Styling för deadline-container */
+  .todo-item .deadline-container {
+    display: inline-flex;
+    align-items: center;
   }
 
-  .overdue {
-    color: red;
+  /* Rubrik-styling */
+  h3 {
+    margin: 10px 0 0 0;
+    font-size: 1.2em;
+    color: #374151;
   }
 
+  /* Överstigna todos (förfallna uppgifter) */
+  .overdue h3 {
+    color: #ef4444;
+    font-weight: bold;
+  }
+
+  .overdue-icon {
+    display: inline-block;
+    position: relative;
+    margin-left: 5px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .overdue-text {
+    font-size: 14px;
+    color: #ef4444;
+    visibility: hidden;
+    position: absolute;
+    left: 40px;
+    top: 5px;
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ef4444;
+    border-radius: 5px;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .overdue-icon:hover .overdue-text {
+    visibility: visible;
+  }
+
+  /* Slutförda todos */
+  .completed h3 {
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+
+  /* Styling för knappar */
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  /* Styling för paragraf */
+  p {
+    margin-top: 15px;
+    font-size: 1em;
+    color: #6b7280;
+  }
 </style>
