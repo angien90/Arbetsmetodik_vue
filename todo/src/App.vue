@@ -19,23 +19,26 @@ import { RouterLink, RouterView } from 'vue-router';
 <style scoped>
   nav {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    margin-bottom: 30px;
+    gap: 0;
+    width: 100vw; 
+    margin-bottom: 0 30px;
     color: black;
     font-weight: bold;
+    white-space: nowrap;
   }
 
-  nav a {
-    margin: 10px 20px; 
+  nav a { 
+    padding: 10px 15px;
     color: black;
-    text-decoration: none; 
-    transition: color 0.3s ease; 
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: inline-block;
   }
 
   nav a:hover {
     font-size: 1.2rem;
-   text-decoration: underline;
+    text-decoration: underline;
   }
 </style> 

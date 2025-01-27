@@ -47,23 +47,24 @@ function removeObjectFromList() {
 </script>
 
 <template>
-  <div :class="{ completed: isDone, overdue: isOverdue }" class="todo-item">
-    <div>
+  <article :class="{ completed: isDone, overdue: isOverdue }" class="todo-item">
+    <header>
       <h3>{{ todoText }}</h3>
-      <div class="deadline-container">
-        <p>Deadline: {{ formattedDeadline }}</p>
-        <p v-if="isOverdue" class="overdue-icon">⚠️<span class="overdue-text">Förfallen!</span></p>
-      </div>
-    </div>
+    </header>
 
-    <div class="buttons">
+    <section class="deadline-container">
+      <p>Deadline: {{ formattedDeadline }}</p>
+      <p v-if="isOverdue" class="overdue-icon">⚠️<span class="overdue-text">Förfallen!</span></p>
+    </section>
+
+    <section class="buttons">
       <button @click="toggleCompletedState">
         <span v-if="isDone">Avmarkera som klar</span>
         <span v-if="!isDone">Markera som klar</span>
       </button>
       <button @click="removeObjectFromList">Ta bort</button>
-    </div>
-  </div>
+    </section>
+  </article>
 </template>
 
 <style scoped>

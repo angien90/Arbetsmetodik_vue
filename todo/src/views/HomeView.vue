@@ -81,32 +81,30 @@ function deleteFinishedTodos() {
     <h1>Mission Possible</h1>
     <h2>Gör dina uppdrag möjliga</h2>
 
-    <div class="input-container">
+    <section class="input-container">
       <h3>Lägg till en ny task</h3>
       <input type="text" v-model="todoName" @keyup.enter="addTodo" placeholder="Skriv in ett nytt uppdrag här..." />
-      <div class="date-and-button-wrapper">
-        <div class="date-input-wrapper">
-          <label for="deadline">Ange deadline</label>
-          <input type="date" id="deadline" v-model="todoDate" />
-        </div>
+      <section class="form-group">
+        <label for="deadline">Ange deadline</label>
+        <input type="date" id="deadline" v-model="todoDate" />
         <button @click="addTodo">Lägg till todo</button>
-      </div>
-    </div>
+      </section>
+    </section>
    
-    <div class="filter-and-button-wrapper">
+    <section class="filter-and-button-wrapper">
       <select v-model="filter">
+        <option value="Visa alla">Alla todos</option>
         <option value="Klar">Klara</option>
         <option value="Inte klar">Inte klara</option>
         <option value="Förfallna todos">Förfallna todos</option>
-        <option value="Visa alla">Alla todos</option>
       </select>
 
     <button @click="deleteFinishedTodos">Ta bort klara Todos</button>
-  </div>
+    </section>
 
-    <div class="my-task-list">
+    <section class="my-task-list">
       <p v-if="showCompletedMessage">Snyggt jobbat med att göra klart en uppgift! 🎉</p>
-      <h3>Dina Tasks</h3>
+      <h2>Dina Tasks</h2>
       <ul>
         <li v-for="todo in filteredTodos" :key="todo.id">
           <SingleTodo 
@@ -120,8 +118,7 @@ function deleteFinishedTodos() {
         </li>
       </ul>
       <p v-if="todos.length === 0">Du är klar med alla uppgifter! 👏👏👏</p>
-    </div>
-    
+    </section>
   </main>
 </template>
 
@@ -135,12 +132,14 @@ function deleteFinishedTodos() {
   }
 
   main {
+    width: 90%;
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
   }
 
   h1, h2, h3 {
@@ -149,7 +148,7 @@ function deleteFinishedTodos() {
   }
 
   h2 {
-    font-weight: 300;
+    font-weight: lighter;
     color: #555;
     margin-bottom: 20px;
   }
@@ -175,7 +174,7 @@ function deleteFinishedTodos() {
     margin-bottom: 10px;
     border: 1px solid #d1d5db; 
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 1em;
   }
 
   .input-container input:focus {
@@ -184,13 +183,20 @@ function deleteFinishedTodos() {
     box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
   }
 
+  .form-group button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
   button {
     padding: 10px 20px;
     background-color: #2563eb;
     color: #fff;
     border: none;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
   }
@@ -204,10 +210,11 @@ function deleteFinishedTodos() {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    gap: 20px;
   }
 
   .filter-and-button-wrapper select {
-    width: 48%;
+    width: auto;
     padding: 10px;
     border: 1px solid #d1d5db;
     border-radius: 5px;
