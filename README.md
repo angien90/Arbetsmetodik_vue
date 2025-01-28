@@ -1,5 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/srOU_jDf)
 
+test
 
 # Todo app
 
@@ -11,12 +12,10 @@ Vi implementerade även stöd för LocalStorage, vilket gör att den skapade tod
 
 - [@angien90](https://github.com/angien90)
 
-
 ## Screenshots på projektet
 
 ![Filnamn](Länk till fil)
 
-   
 ## Tech Stack
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -39,7 +38,6 @@ Vi implementerade även stöd för LocalStorage, vilket gör att den skapade tod
 
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-
 ## Installationer
 
 För att öppna och köra detta Vue-projekt på en annan dator behöver du vanligtvis göra följande inställningar och steg:
@@ -53,7 +51,7 @@ Klona projektet från en Git-repository eller kopiera projektmappen till den nya
 
 **3. Installera projektets beroenden**
 Öppna terminalen och navigera till projektets mapp.
-Kör kommandot: 
+Kör kommandot:
 npm install
 Detta installerar alla beroenden som finns angivna i projektets package.json.
 
