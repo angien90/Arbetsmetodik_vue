@@ -12,7 +12,11 @@ Vi implementerade även stöd för LocalStorage, vilket gör att den skapade tod
 
 ## Screenshots på projektet
 
-![Filnamn](Länk till fil)
+![Fliken Hem](images/vy_1.png) ![Fliken Avklarade](images/vy_2.png) ![Fliken Om appen](images/vy_3.png)
+
+#### Lighthouse analys
+
+![Fliken Hem](images/lighthouse_mobile_inkognito.png) ![Fliken Hem](images/lighthouse_desktop_inkognito.png)
 
 ## Tech Stack
 
