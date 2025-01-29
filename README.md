@@ -8,7 +8,7 @@ Vi implementerade även stöd för LocalStorage, vilket gör att den skapade tod
 
 ## Författare
 
-- [@angien90](https://github.com/angien90)
+[@angien90](https://github.com/angien90)
 
 ## Screenshots på projektet
 
