@@ -45,19 +45,19 @@ Vi implementerade även stöd för LocalStorage, vilket gör att den skapade tod
 För att öppna och köra detta Vue-projekt på en annan dator behöver du vanligtvis göra följande inställningar och steg:
 
 ```
-**1. Installera Node.js och npm**
+1. Installera Node.js och npm
 Ladda ner och installera Node.js om det inte redan finns på datorn. npm (Node Package Manager) installeras automatiskt med Node.js.
 
-**2. Ladda ner projektet**
+2. Ladda ner projektet
 Klona projektet från en Git-repository eller kopiera projektmappen till den nya datorn.
 
-**3. Installera projektets beroenden**
+3. Installera projektets beroenden
 Öppna terminalen och navigera till projektets mapp.
 Kör kommandot:
 npm install
 Detta installerar alla beroenden som finns angivna i projektets package.json.
 
-**4. Starta utvecklingsservern**
+4. Starta utvecklingsservern
 Kör följande kommando för att starta projektet:
 npm run dev
 ```
