@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/fed24d-arbetsmetodik-inl-2-vue-angien90/',
+  base: '/Arbetsmetodik_vue/',
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
