@@ -55,11 +55,10 @@ Kör kommandot:
 npm install
 Detta installerar alla beroenden som finns angivna i projektets package.json.
 
-## Betyg
-![image](https://github.com/user-attachments/assets/0beb86aa-ef2a-4317-b397-0b40a62f588c)
-
-
 4. Starta utvecklingsservern
 Kör följande kommando för att starta projektet:
 npm run dev
 ```
+
+## Betyg
+![image](https://github.com/user-attachments/assets/0beb86aa-ef2a-4317-b397-0b40a62f588c)
